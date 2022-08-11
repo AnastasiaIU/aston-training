@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/show_count"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFF00"
+        android:gravity="center"
+        android:text="@string/count_initial_value"
+        android:textColor="@color/dark_blue"
+        android:textSize="160sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFF00"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_toast"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="@color/dark_blue"
+            android:padding="16dp"
             android:text="@string/button_label_toast"
-            android:textColor="@android:color/black"
-            android:textSize="60sp" />
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button_zero"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/grey"
+            android:padding="16dp"
+            android:text="@string/button_label_zero"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/button_count"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="@color/blue"
+            android:padding="16dp"
             android:text="@string/button_label_count"
-            android:textColor="@android:color/black"
-            android:textSize="60sp" />
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/show_count"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#FFFF00"
-        android:gravity="center"
-        android:text="@string/count_initial_value"
-        android:textColor="@color/purple_500"
-        android:textSize="200sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear_layout" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

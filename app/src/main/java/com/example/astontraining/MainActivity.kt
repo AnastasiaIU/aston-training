@@ -16,6 +16,15 @@ class MainActivity : AppCompatActivity() {
     // Reference to the [TextView] show_count
     private lateinit var showCountTextView: TextView
 
+    // Reference to the [Button] button_toast
+    private lateinit var buttonToast: Button
+
+    // Reference to the [Button] button_zero
+    private lateinit var buttonZero: Button
+
+    // Reference to the [Button] button_count
+    private lateinit var buttonCount: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,12 +33,14 @@ class MainActivity : AppCompatActivity() {
         showCountTextView = findViewById(R.id.show_count)
 
         // Find [Button]s
-        val toastButton: Button = findViewById(R.id.button_toast)
-        val countButton: Button = findViewById(R.id.button_count)
+        buttonToast = findViewById(R.id.button_toast)
+        buttonZero = findViewById(R.id.button_zero)
+        buttonCount = findViewById(R.id.button_count)
 
         // Set click listeners on buttons
-        toastButton.setOnClickListener { showToast() }
-        countButton.setOnClickListener { countUp() }
+        buttonToast.setOnClickListener { showToast() }
+        buttonZero.setOnClickListener { resetCount() }
+        buttonCount.setOnClickListener { countUp() }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -47,6 +58,9 @@ class MainActivity : AppCompatActivity() {
 
         // Set the restored value to the [TextView] show_count
         showCountTextView.text = count.toString()
+
+        // Set colors for buttons
+        setButtonsColors()
     }
 
     /**
@@ -58,7 +72,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Increases the amount of taps by 1 and sets the current amount to the [TextView] show_count.
+     * Increases the amount of taps by 1, sets the current amount to the [TextView] show_count
+     * and sets colors for buttons.
      */
     private fun countUp() {
 
@@ -67,5 +82,38 @@ class MainActivity : AppCompatActivity() {
 
         // Set the current amount to the [TextView] show_count
         showCountTextView.text = count.toString()
+
+        // Set colors for buttons
+        setButtonsColors()
+    }
+
+    /**
+     * Resets the amount of taps to 0, sets colors fot buttons
+     * and updates the value at the [TextView] show_count.
+     */
+    private fun resetCount() {
+
+        // Set the amount of taps to 0
+        count = 0
+
+        // Update the value at the TextView show_count
+        showCountTextView.text = count.toString()
+
+        // Set colors for buttons
+        setButtonsColors()
+    }
+
+    /**
+     * Sets colors for buttons.
+     */
+    private fun setButtonsColors() {
+
+        // Get colors for the [Button]s
+        val buttonZeroColor = if (count == 0) R.color.grey else R.color.pink
+        val buttonCountColor = if (count % 2 == 0) R.color.blue else R.color.turquoise
+
+        // Set colors for the [Button]s
+        buttonZero.setBackgroundColor(getColor(buttonZeroColor))
+        buttonCount.setBackgroundColor(getColor(buttonCountColor))
     }
 }
