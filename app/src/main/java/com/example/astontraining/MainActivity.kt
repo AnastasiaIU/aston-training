@@ -1,34 +1,48 @@
 package com.example.astontraining
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 private const val KEY_COUNT = "count"
+const val EXTRA_COUNT = "com.example.astontraining.extra.COUNT"
 
 class MainActivity : AppCompatActivity() {
 
     // Amount of taps
     private var count = 0
 
-    // Reference to the [TextView] show_count
+    // References to Views
     private lateinit var showCountTextView: TextView
+    private lateinit var helloButton: Button
+    private lateinit var countButton: Button
+
+    // Result receiver
+    private lateinit var getResult: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Find the [TextView] show_count
+        // Find Views
         showCountTextView = findViewById(R.id.show_count)
+        helloButton = findViewById(R.id.button_hello)
+        countButton = findViewById(R.id.button_count)
 
-        // Find [Button]s
-        val toastButton: Button = findViewById(R.id.button_toast)
-        val countButton: Button = findViewById(R.id.button_count)
+        // Set receiver
+        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                count = it.data!!.getIntExtra(EXTRA_REPLY, 0)
+            }
+        }
 
-        // Set click listeners on buttons
-        toastButton.setOnClickListener { showToast() }
+        // Set a ClickListener to the buttons
+        helloButton.setOnClickListener { launchSecondActivity() }
         countButton.setOnClickListener { countUp() }
     }
 
@@ -42,19 +56,26 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
 
-        // Restore mCount variable by the key
+        // Restore the variable by the key
         count = savedInstanceState.getInt(KEY_COUNT)
 
-        // Set the restored value to the [TextView] show_count
+        // Set the restored value to the TextView
         showCountTextView.text = count.toString()
     }
 
     /**
-     * Shows a [Toast] message.
+     * Launches the [SecondActivity].
      */
-    private fun showToast() {
-        val toast = Toast.makeText(this, R.string.toast_message, Toast.LENGTH_SHORT)
-        toast.show()
+    private fun launchSecondActivity() {
+
+        // Explicit Intent to launch the SecondActivity
+        val launchIntent = Intent(this, SecondActivity::class.java)
+
+        // Add the current amount of taps to the Intent as an extra
+        launchIntent.putExtra(EXTRA_COUNT, count)
+
+        // Start the SecondActivity
+        getResult.launch(launchIntent)
     }
 
     /**
@@ -65,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         // Increase the amount of taps by 1
         count++
 
-        // Set the current amount to the [TextView] show_count
+        // Set the current amount to the TextView
         showCountTextView.text = count.toString()
     }
 }
