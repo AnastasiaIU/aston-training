@@ -5,18 +5,18 @@
     android:background="#FFFF00">
 
     <Button
-        android:id="@+id/button_toast"
+        android:id="@+id/button_hello"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/purple_200"
-        android:text="@string/button_label_toast"
+        android:text="@string/button_label_say_hello"
         android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/button_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_toast"
+        android:layout_below="@id/button_hello"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/purple_200"
         android:text="@string/button_label_count"
