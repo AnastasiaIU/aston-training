@@ -2,11 +2,13 @@ package com.example.astontraining
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
+private const val LOG_TAG = "SecondActivity"
 const val EXTRA_REPLY = "com.example.astontraining.extra.REPLY"
 
 class SecondActivity : AppCompatActivity() {
@@ -19,6 +21,9 @@ class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
+
+        Log.d(LOG_TAG, "-------")
+        Log.d(LOG_TAG, "onCreate")
 
         // Find Views
         secondButton = findViewById(R.id.button_second)
@@ -49,7 +54,39 @@ class SecondActivity : AppCompatActivity() {
         // Set the OK result
         setResult(RESULT_OK, replyIntent)
 
+        Log.d(LOG_TAG, "End SecondActivity")
+
         // Finish the Activity
         finish()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(LOG_TAG, "onStart")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(LOG_TAG, "onStop")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(LOG_TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(LOG_TAG, "onPause")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(LOG_TAG, "onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(LOG_TAG, "onDestroy")
     }
 }

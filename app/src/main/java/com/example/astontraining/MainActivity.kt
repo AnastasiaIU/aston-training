@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -11,7 +12,7 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 
-private const val KEY_REPLY_HEAD = "com.example.astontraining.REPLY_HEAD"
+private const val LOG_TAG = "MainActivity"
 private const val KEY_REPLY = "com.example.astontraining.REPLY"
 const val EXTRA_MESSAGE = "com.example.astontraining.extra.MESSAGE"
 
@@ -30,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Log.d(LOG_TAG, "-------")
+        Log.d(LOG_TAG, "onCreate")
+
         // Find Views
         mainButton = findViewById(R.id.button_main)
         messageEditText = findViewById(R.id.editText_main)
@@ -40,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
                 replyTextView.text = it.data?.getStringExtra(EXTRA_REPLY)
-                replyHeadTextView.text = getString(R.string.text_header_reply)
                 replyTextView.visibility = View.VISIBLE
                 replyHeadTextView.visibility = View.VISIBLE
             }
@@ -55,8 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         if (replyTextView.text != null) {
 
-            // Write variables with keys in the Bundle
-            outState.putString(KEY_REPLY_HEAD, replyHeadTextView.text.toString())
+            // Write the variable with a key in the Bundle
             outState.putString(KEY_REPLY, replyTextView.text.toString())
         }
     }
@@ -66,8 +68,7 @@ class MainActivity : AppCompatActivity() {
 
         if (!savedInstanceState.isEmpty) {
 
-            // Restore variables by keys
-            replyHeadTextView.text = savedInstanceState.getString(KEY_REPLY_HEAD)
+            // Restore the variable by the key
             replyTextView.text = savedInstanceState.getString(KEY_REPLY)
 
             // Restore visibility
@@ -92,5 +93,35 @@ class MainActivity : AppCompatActivity() {
 
         // Start the SecondActivity
         getResult.launch(launchIntent)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(LOG_TAG, "onStart")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(LOG_TAG, "onStop")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(LOG_TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(LOG_TAG, "onPause")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(LOG_TAG, "onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(LOG_TAG, "onDestroy")
     }
 }
