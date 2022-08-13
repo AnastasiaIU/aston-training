@@ -32,6 +32,9 @@ class SecondActivity : AppCompatActivity() {
         secondButton.setOnClickListener { returnReply() }
     }
 
+    /**
+     * Sets [Intent] for a reply and finishes the [SecondActivity].
+     */
     private fun returnReply() {
 
         // Intent for the response
