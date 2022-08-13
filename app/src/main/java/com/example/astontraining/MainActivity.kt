@@ -11,6 +11,8 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 
+private const val KEY_REPLY_HEAD = "com.example.astontraining.REPLY_HEAD"
+private const val KEY_REPLY = "com.example.astontraining.REPLY"
 const val EXTRA_MESSAGE = "com.example.astontraining.extra.MESSAGE"
 
 class MainActivity : AppCompatActivity() {
@@ -46,6 +48,32 @@ class MainActivity : AppCompatActivity() {
 
         // Set a ClickListener to the button
         mainButton.setOnClickListener { launchSecondActivity() }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        if (replyTextView.text != null) {
+
+            // Write variables with keys in the Bundle
+            outState.putString(KEY_REPLY_HEAD, replyHeadTextView.text.toString())
+            outState.putString(KEY_REPLY, replyTextView.text.toString())
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        if (!savedInstanceState.isEmpty) {
+
+            // Restore variables by keys
+            replyHeadTextView.text = savedInstanceState.getString(KEY_REPLY_HEAD)
+            replyTextView.text = savedInstanceState.getString(KEY_REPLY)
+
+            // Restore visibility
+            replyHeadTextView.visibility = View.VISIBLE
+            replyTextView.visibility = View.VISIBLE
+        }
     }
 
     /**
