@@ -1,10 +1,22 @@
 <resources>
-    <string name="app_name">Two Activities</string>
-    <string name="button_label_send">Send</string>
-    <string name="button_label_reply">Reply</string>
-    <string name="activity2_name">Second Activity</string>
-    <string name="text_header">Message Received</string>
-    <string name="text_header_reply">Reply Received</string>
-    <string name="editText_main">Enter Your Message Here</string>
-    <string name="editText_second">Enter Your Reply Here</string>
+    <string name="app_name">Passages for Reading</string>
+    <string name="activity2_name">The Passage</string>
+    <string name="text_main">Choose a passage to read:</string>
+    <string name="first_passage_header">Ancient Writing</string>
+    <string name="second_passage_header">The Giant Baobab</string>
+    <string name="third_passage_header">Royal Purple Silk</string>
+    <string name="first_passage">Imagine a time when there was no writing. For many thousands of years, people did not write things down. Instead, they memorized stories and important information. Writing was first discovered in Iraq more than 5,000 years ago. It developed when people began to grow their food instead of relying on hunting and gathering. They needed a way to document how much grain they had, so writing was a useful way to keep track of food supplies. Writing was also used to record past events and write about the gods.
+        \n\n
+        In ancient Egypt, writing was highly valued. Writers were so special that their job had the title of “scribe.” Boys could become scribes by apprenticing themselves to older scribes. Apprentices began to learn writing when they were 12 years old. It was not easy to learn this craft since ancient Egyptians wrote using hieroglyphics. Their system of writing used pictures instead of letters. At first, young scribes wrote on pieces of clay. When they got better, they were allowed to write on papyrus, which was paper made from river reed plants. Despite the difficulty, many boys wanted to become scribes. It was seen as an important job. Scribes did not have to be soldiers or participate in growing food. Instead, they wrote important documents.
+        \n\n
+        Writing was even more special for the ancient Egyptians than it is for us. Egyptians believed that writing had a kind of magic. There was even a god and a goddess of writing. The people of Egypt believed that scribes could heal disease just by writing down a prayer for someone to be cured. Imagine if people thought that you could do magic by writing! In a way, you can, because when you write, you create stories and share your imagination with others.
+    </string>
+    <string name="second_passage">One of the most incredible trees in the world is known as the baobab. It is native to several parts of the world, including South Africa and Australia. Sometimes, it is hard to tell what the name of a tree is because they tend to look like each other. This is not a problem with the baobab. Its appearance is quite distinct, so no one can mistake it for another tree. The baobab is extremely wide at the base, so people often take shelter under it. One Australian baobab was so large that people were able to turn part of the tree into a small room. Prisoners were kept inside the tree room as a resting place when they were transported to the city. The tree itself was so strong and wide that it could hold a large group of people. The tree is now estimated to be 1,500 years old, and despite being used as a holding chamber, it is still thriving.
+        \n\n
+        The baobabs are also called monkey bread trees. They have edible fruits and leaves. The tree’s fruit is very delicious and is a tasty treat that is eaten in many African countries. The fruits have also been found to be very healthy. They are full of vitamins and minerals. People make porridge and flavor soft drinks from the fruit. The leaves are used by some people to make a nutritious soup. Since the tree grows in dry environments, it has to store water. The tree soaks in water during wet seasons. During dry spells, it is able to use the water it has stored away. Some baobabs can store thousands of gallons of water. Of course, the baobabs also provide the people of sunny South Africa with some shade during hot African days.
+    </string>
+    <string name="third_passage">At one time there were restrictions on what color of clothing people were allowed to wear. In the Byzantine Empire, only the royal family was allowed to wear purple garments made of silk. At that time, purple was the symbol of royalty. No one else was allowed to wear clothes of this color. The purple dye itself was not easy to get. In ancient times, clothes were dyed purple using a liquid found in a type of sea snail. These snails had to be fished out of the Mediterranean Sea. After they were caught, purple dye was extracted from them and sold to royalty at high prices.
+        \n\n
+        The silk material itself was very expensive in the Byzantine Empire. The silk had to be transported all the way from China since no one else knew how to produce it. The Chinese were willing to sell silk cloth to anyone. However, they were not willing to tell the secret of how to make it. The Byzantine Emperor decided, however, that he wanted to produce his own purple silk. He already had the snails to make the purple dye, but did not know how to make the fabric. The Byzantines had good spies, so the emperor decided to use them to learn the Chinese secret. He sent two monks on a covert mission to China. During their voyage, they were able to learn the secrets of Chinese silk production. When they left China, they looked like they were carrying only their walking sticks. No one bothered them as they left. The sticks were hollow, though, and in them they carried the secret of silk production—worms! Strangely, the rich purple silks worn proudly by the emperors turned out to be the product of lowly snails and worms.
+    </string>
 </resources>

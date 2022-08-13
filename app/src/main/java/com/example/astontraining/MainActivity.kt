@@ -1,68 +1,65 @@
 package com.example.astontraining
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 
-const val EXTRA_MESSAGE = "com.example.astontraining.extra.MESSAGE"
+const val EXTRA_PASSAGE_HEADER = "com.example.astontraining.extra.PASSAGE_HEADER"
+const val EXTRA_PASSAGE = "com.example.astontraining.extra.PASSAGE"
 
 class MainActivity : AppCompatActivity() {
 
     // References to Views
-    private lateinit var mainButton: Button
-    private lateinit var messageEditText: EditText
-    private lateinit var replyHeadTextView: TextView
-    private lateinit var replyTextView: TextView
-
-    // Result receiver for a started Intent
-    private lateinit var getResult: ActivityResultLauncher<Intent>
+    private lateinit var firstButton: Button
+    private lateinit var secondButton: Button
+    private lateinit var thirdButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Find Views
-        mainButton = findViewById(R.id.button_main)
-        messageEditText = findViewById(R.id.editText_main)
-        replyHeadTextView = findViewById(R.id.text_header_reply)
-        replyTextView = findViewById(R.id.text_message_reply)
+        firstButton = findViewById(R.id.first_button)
+        secondButton = findViewById(R.id.second_button)
+        thirdButton = findViewById(R.id.third_button)
 
-        // Set receiver
-        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                replyTextView.text = it.data?.getStringExtra(EXTRA_REPLY)
-                replyHeadTextView.text = getString(R.string.text_header_reply)
-                replyTextView.visibility = View.VISIBLE
-                replyHeadTextView.visibility = View.VISIBLE
-            }
+        // Set a ClickListener to the buttons
+        firstButton.setOnClickListener {
+            openPassage(
+                getString(R.string.first_passage_header),
+                getString(R.string.first_passage)
+            )
         }
 
-        // Set a ClickListener to the button
-        mainButton.setOnClickListener { launchSecondActivity() }
+        secondButton.setOnClickListener {
+            openPassage(
+                getString(R.string.second_passage_header),
+                getString(R.string.second_passage)
+            )
+        }
+
+        thirdButton.setOnClickListener {
+            openPassage(
+                getString(R.string.third_passage_header),
+                getString(R.string.third_passage)
+            )
+        }
     }
 
     /**
      * Launches the SecondActivity.
      */
-    private fun launchSecondActivity() {
+    private fun openPassage(passageHeader: String, passage: String) {
 
         // Explicit Intent to launch the SecondActivity
         val launchIntent = Intent(this, SecondActivity::class.java)
 
-        // Text from the EditText
-        val message = messageEditText.text.toString()
-
-        // Add the text to the Intent as an extra
-        launchIntent.putExtra(EXTRA_MESSAGE, message)
+        // Add a passage header and a passage to the Intent as an extra
+        launchIntent.putExtra(EXTRA_PASSAGE_HEADER, passageHeader)
+        launchIntent.putExtra(EXTRA_PASSAGE, passage)
 
         // Start the SecondActivity
-        getResult.launch(launchIntent)
+        startActivity(launchIntent)
     }
 }
