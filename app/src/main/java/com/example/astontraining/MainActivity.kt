@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var openWebButton: Button
     private lateinit var openLocButton: Button
     private lateinit var shareTextButton: Button
+    private lateinit var takePicButton: Button
     private lateinit var websiteEditText: EditText
     private lateinit var locationEditText: EditText
     private lateinit var shareEditText: EditText
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         openWebButton = findViewById(R.id.open_website_button)
         openLocButton = findViewById(R.id.open_location_button)
         shareTextButton = findViewById(R.id.share_text_button)
+        takePicButton = findViewById(R.id.take_pic_button)
         websiteEditText = findViewById(R.id.website_edittext)
         locationEditText = findViewById(R.id.location_edittext)
         shareEditText = findViewById(R.id.share_edittext)
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         openWebButton.setOnClickListener { openWebsite() }
         openLocButton.setOnClickListener { openLocation() }
         shareTextButton.setOnClickListener { shareText() }
+        takePicButton.setOnClickListener { takePicture() }
     }
 
     /**
@@ -86,5 +89,17 @@ class MainActivity : AppCompatActivity() {
 
         // Start an Activity
         startActivity(shareIntent)
+    }
+
+    /**
+     * Opens a camera application using implicit [Intent].
+     */
+    private fun takePicture() {
+
+        // Create a new Intent to open a camera application
+        val cameraIntent = Intent("android.media.action.IMAGE_CAPTURE")
+
+        // Start an Activity
+        startActivity(cameraIntent)
     }
 }
