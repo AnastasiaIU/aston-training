@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Load Picture</string>
+    <string name="edit_text_hint">Enter Image URL</string>
+    <string name="toast_message">Unable to load image</string>
 </resources>
