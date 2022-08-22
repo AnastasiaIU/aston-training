@@ -6,10 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <com.example.astontraining.DialView
+        android:id="@+id/dial_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_regular"
+        app:hand_hour_color="@color/blue"
+        app:hand_hour_length="@dimen/hand_hour_length"
+        app:hand_hour_width="@dimen/hand_hour_width"
+        app:hand_minute_color="@color/red"
+        app:hand_minute_length="@dimen/hand_minute_length"
+        app:hand_minute_width="@dimen/hand_minute_width"
+        app:hand_second_color="@color/black"
+        app:hand_second_length="@dimen/hand_second_length"
+        app:hand_second_width="@dimen/hand_second_width"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

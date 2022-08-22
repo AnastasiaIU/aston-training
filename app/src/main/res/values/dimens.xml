@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_regular">16dp</dimen>
+    <dimen name="hand_hour_width">7dp</dimen>
+    <dimen name="hand_minute_width">7dp</dimen>
+    <dimen name="hand_second_width">7dp</dimen>
+    <dimen name="hand_hour_length">50dp</dimen>
+    <dimen name="hand_minute_length">80dp</dimen>
+    <dimen name="hand_second_length">100dp</dimen>
+</resources>

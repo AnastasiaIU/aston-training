@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DialView">
+        <attr name="hand_hour_color" format="color" />
+        <attr name="hand_minute_color" format="color" />
+        <attr name="hand_second_color" format="color" />
+        <attr name="hand_hour_width" format="dimension" />
+        <attr name="hand_minute_width" format="dimension" />
+        <attr name="hand_second_width" format="dimension" />
+        <attr name="hand_hour_length" format="dimension" />
+        <attr name="hand_minute_length" format="dimension" />
+        <attr name="hand_second_length" format="dimension" />
+    </declare-styleable>
+</resources>
