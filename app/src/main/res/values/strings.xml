@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Phone Contacts</string>
+    <string name="contact_image_description">Contact image</string>
+    <string name="floating_action_button_description">Add new contact</string>
+    <string name="contact_name_and_surname_example">Tammy Wall</string>
+    <string name="contact_phone_number_example">(200) 682–7621</string>
+    <string name="contact_detail_name">Name</string>
+    <string name="contact_detail_surname">Surname</string>
+    <string name="contact_detail_phone_number">Phone number</string>
+    <string name="save_button_label">Save</string>
+    <string name="contacts_list_fragment_label">Contacts</string>
+    <string name="contact_detail_fragment_label">Contact Detail</string>
+    <string name="popup_menu_delete">Delete</string>
 </resources>
