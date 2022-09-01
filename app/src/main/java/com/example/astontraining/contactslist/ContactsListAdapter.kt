@@ -14,31 +14,34 @@ import com.example.astontraining.databinding.ListItemContactBinding
  * [ListAdapter] implementation for the [RecyclerView].
  */
 class ContactsListAdapter(
-    private val onContactClickListener: (Int) -> Unit,
-    private val onContactLongClickListener: (Contact) -> Boolean
+    private val toContactDetail: (Int) -> Unit,
+    private val deleteContact: (Contact) -> Boolean
 ) :
     ListAdapter<Contact, ContactsListAdapter.ContactViewHolder>(DiffCallback) {
 
     class ContactViewHolder(
         private var binding: ListItemContactBinding,
-        private val onContactClickListener: (Int) -> Unit,
-        private val onContactLongClickListener: (Contact) -> Boolean
+        private val toContactDetail: (Int) -> Unit,
+        private val deleteContact: (Contact) -> Boolean
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private var id = 0
         private lateinit var currentContact: Contact
 
         init {
+
             binding.listItemContact.setOnClickListener {
-                onContactClickListener(id)
+                toContactDetail(id)
             }
+
             binding.listItemContact.setOnLongClickListener {
 
                 val popupMenu = PopupMenu(it.context, it)
 
-                popupMenu.inflate(R.menu.popup_menu)
-                popupMenu.setOnMenuItemClickListener {
-                    onContactLongClickListener(currentContact)
+                popupMenu.apply {
+                    inflate(R.menu.popup_menu)
+                    setOnMenuItemClickListener { deleteContact(currentContact) }
+                    show()
                 }
 
                 true
@@ -103,8 +106,8 @@ class ContactsListAdapter(
     ): ContactViewHolder {
         return ContactViewHolder(
             ListItemContactBinding.inflate(LayoutInflater.from(parent.context)),
-            onContactClickListener,
-            onContactLongClickListener
+            toContactDetail,
+            deleteContact
         )
     }
 

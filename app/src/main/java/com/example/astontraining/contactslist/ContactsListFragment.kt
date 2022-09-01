@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -44,7 +43,7 @@ class ContactsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val onContactClickListener: (Int) -> Unit = { id ->
+        val toContactDetail: (Int) -> Unit = { id ->
 
             val action = ContactsListFragmentDirections
                 .actionContactsListFragmentToContactDetailFragment(id)
@@ -52,14 +51,14 @@ class ContactsListFragment : Fragment() {
             this.findNavController().navigate(action)
         }
 
-        val onContactLongClickListener: (Contact) -> Boolean = { contact ->
+        val deleteContact: (Contact) -> Boolean = { contact ->
 
             viewModel.deleteContact(contact)
 
             true
         }
 
-        val adapter = ContactsListAdapter(onContactClickListener, onContactLongClickListener)
+        val adapter = ContactsListAdapter(toContactDetail, deleteContact)
 
         // Attach an observer on the contacts list to update
         // the UI automatically when the data changes
