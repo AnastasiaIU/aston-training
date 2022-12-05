@@ -1,43 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contact_detail_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    tools:ignore="MergeRootFrame">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/contact_picture"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/detail_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/contact_detail_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".MainActivity">
 
         <LinearLayout
             android:layout_width="match_parent"

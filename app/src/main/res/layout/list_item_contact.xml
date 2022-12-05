@@ -2,39 +2,42 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list_item_contact"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:minHeight="@dimen/list_item_card_min_height">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/list_item_contact_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/list_item_image_size"
+        android:layout_height="@dimen/list_item_image_size"
+        android:layout_margin="@dimen/list_item_image_margin"
         android:contentDescription="@string/contact_image_description"
         android:src="@drawable/no_profile_picture_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/ShapeAppearance.AstonTraining.Circle" />
 
     <TextView
         android:id="@+id/list_item_contact_name_and_surname"
-        style="@style/TextAppearance.AppCompat.Headline"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/padding_small"
-        android:paddingEnd="@dimen/padding_small"
+        android:layout_marginStart="@dimen/text_margin"
+        android:layout_marginTop="@dimen/margin_small"
+        android:maxLines="1"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
         app:layout_constraintStart_toEndOf="@id/list_item_contact_image"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/list_item_contact_image"
         tools:text="@string/contact_name_and_surname_example" />
 
     <TextView
         android:id="@+id/list_item_contact_phone_number"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/padding_small"
-        android:paddingEnd="@dimen/padding_small"
-        app:layout_constraintStart_toEndOf="@id/list_item_contact_image"
+        android:maxLines="1"
+        android:textAppearance="?attr/textAppearanceBody2"
+        app:layout_constraintStart_toStartOf="@id/list_item_contact_name_and_surname"
         app:layout_constraintTop_toBottomOf="@id/list_item_contact_name_and_surname"
         tools:text="@string/contact_phone_number_example" />
 

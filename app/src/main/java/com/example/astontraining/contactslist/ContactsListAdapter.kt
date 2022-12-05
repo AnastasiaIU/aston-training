@@ -30,11 +30,11 @@ class ContactsListAdapter(
 
         init {
 
-            binding.listItemContact.setOnClickListener {
+            binding.root.setOnClickListener {
                 toContactDetail(id)
             }
 
-            binding.listItemContact.setOnLongClickListener {
+            binding.root.setOnLongClickListener {
 
                 val popupMenu = PopupMenu(it.context, it)
 

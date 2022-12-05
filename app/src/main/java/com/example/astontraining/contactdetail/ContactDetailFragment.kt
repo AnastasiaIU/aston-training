@@ -1,6 +1,8 @@
 package com.example.astontraining.contactdetail
 
+import android.content.ClipData
 import android.os.Bundle
+import android.view.DragEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +17,24 @@ import com.example.astontraining.data.Contact
 import com.example.astontraining.databinding.FragmentContactDetailBinding
 import com.example.astontraining.viewmodel.ContactsViewModel
 import com.example.astontraining.viewmodel.ContactsViewModelFactory
+import com.google.android.material.appbar.CollapsingToolbarLayout
 
 /**
  * A fragment to enter data for a new [Contact] or edit data for an existing [Contact].
  */
 class ContactDetailFragment : Fragment() {
+
+    companion object {
+        /**
+         * The fragment argument representing the item ID that this fragment
+         * represents.
+         */
+        const val ARG_CONTACT_ID = "contact_id"
+    }
+
+    private var contactId: Int? = null
+
+    private var toolbarLayout: CollapsingToolbarLayout? = null
 
     private val navigationArgs: ContactDetailFragmentArgs by navArgs()
 
@@ -32,7 +47,20 @@ class ContactDetailFragment : Fragment() {
     private var _binding: FragmentContactDetailBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var contact: Contact
+    private val dragListener = View.OnDragListener { view, event ->
+        if (event.action == DragEvent.ACTION_DROP) {
+            val clipDataItem: ClipData.Item = event.clipData.getItemAt(0)
+            contactId = clipDataItem.text.toString().toInt()
+        }
+        true
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            //contactId = it.getInt(ARG_CONTACT_ID)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,23 +68,28 @@ class ContactDetailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentContactDetailBinding.inflate(inflater, container, false)
+
+        toolbarLayout = binding.toolbarLayout
+        binding.root.setOnDragListener(dragListener)
+
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = navigationArgs.contactId
+        //val id = navigationArgs.contactId // contactId ?: 0
 
-        if (id > 0) {
-
-            viewModel.retrieveContact(id).observe(this.viewLifecycleOwner) {
-                contact = it
-                bindContact(contact)
+        if (contactId != null) {
+            viewModel.retrieveContact(contactId!!).observe(this.viewLifecycleOwner) {
+                //contact = it
+                bindContact(it)
             }
-        } else {
-            binding.contactDetailSaveButton.setOnClickListener { addContact() }
         }
+
+        binding.contactDetailSaveButton.setOnClickListener { addContact() }
+
     }
 
     override fun onDestroyView() {
@@ -84,16 +117,16 @@ class ContactDetailFragment : Fragment() {
         if (isValidEntry()) {
 
             viewModel.updateContact(
-                id = navigationArgs.contactId,
+                id = 0,//navigationArgs.contactId,
                 name = binding.contactDetailName.text.toString(),
                 surname = binding.contactDetailSurname.text.toString(),
                 phoneNumber = binding.contactDetailPhoneNumber.text.toString()
             )
 
-            val action = ContactDetailFragmentDirections
-                .actionContactDetailFragmentToContactsListFragment()
+            /*val action = ContactDetailFragmentDirections
+                .actionContactDetailFragmentToContactDetailStartFragment()
 
-            findNavController().navigate(action)
+            findNavController().navigate(action)*/
         } else {
             val toastMessage = "Wrong input"
             val toast = Toast.makeText(this.context, toastMessage, Toast.LENGTH_LONG)
@@ -111,10 +144,10 @@ class ContactDetailFragment : Fragment() {
                 binding.contactDetailPhoneNumber.text.toString()
             )
 
-            val action = ContactDetailFragmentDirections
-                .actionContactDetailFragmentToContactsListFragment()
+            /*val action = ContactDetailFragmentDirections
+                .actionContactDetailFragmentToContactDetailStartFragment()
 
-            findNavController().navigate(action)
+            findNavController().navigate(action)*/
         } else {
             val toastMessage = "Wrong input"
             val toast = Toast.makeText(this.context, toastMessage, Toast.LENGTH_LONG)
