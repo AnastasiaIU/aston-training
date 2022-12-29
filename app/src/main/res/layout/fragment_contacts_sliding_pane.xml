@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.slidingpanelayout.widget.SlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_pane_layout"
+    android:name="com.example.astontraining.fragments.ContactsSlidingPane"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/contact_list_container"
+        android:name="com.example.astontraining.view.fragments.ContactsListFragment"
+        android:layout_width="300dp"
+        android:layout_height="match_parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/contact_detail_container"
+        android:name="com.example.astontraining.view.fragments.ContactDetailFragmentDelete"
+        android:layout_width="540dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</androidx.slidingpanelayout.widget.SlidingPaneLayout>

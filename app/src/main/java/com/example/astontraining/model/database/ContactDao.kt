@@ -1,6 +1,7 @@
-package com.example.astontraining.data
+package com.example.astontraining.model.database
 
 import androidx.room.*
+import com.example.astontraining.model.Contact
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -9,18 +10,22 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ContactDao {
 
-    // Retrieves all Contacts from the database
-    @Query("SELECT * FROM contacts ORDER BY name ASC")
+    /**
+     * Retrieves all [Contact] from the database ordered by name and surname in ascending order.
+     * @return the list of [Contact] as flow data stream.
+     */
+    @Query("SELECT * FROM contacts ORDER BY name AND surname")
     fun getContacts(): Flow<List<Contact>>
 
     // Retrieves the Contact from the database by id
     @Query("SELECT * FROM contacts WHERE id = :id")
     fun getContact(id: Int): Flow<Contact>
 
-    // Inserts a Contact into the database. Specify the conflict strategy as IGNORE,
-    // when the user tries to add an existing Contact into the database
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(contact: Contact)
+    /**
+     * Inserts the [contact] into the database.
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertContact(contact: Contact)
 
     // Updates the Contact in the database
     @Update

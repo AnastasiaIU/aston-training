@@ -1,4 +1,4 @@
-package com.example.astontraining
+package com.example.astontraining.view.fragments
 
 import android.content.ClipData
 import android.content.ClipDescription
@@ -8,33 +8,34 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.astontraining.placeholder.PlaceholderContent;
-import com.example.astontraining.databinding.FragmentContactListBinding
-import com.example.astontraining.databinding.ContactListContentBinding
+import com.example.astontraining.R
+import com.example.astontraining.databinding.FragmentContactsListBinding
 
 /**
  * A Fragment representing a list of Pings. This fragment
  * has different presentations for handset and larger screen devices. On
  * handsets, the fragment presents a list of items, which when touched,
- * lead to a {@link ContactDetailFragment} representing
+ * lead to a {@link ContactDetailFragmentDelete} representing
  * item details. On larger screens, the Navigation controller presents the list of items and
  * item details side-by-side using two vertical panes.
  */
 
-class ContactListFragment : Fragment() {
+/*
+class ContactListFragmentDelete : Fragment() {
 
-    /**
+    */
+/**
      * Method to intercept global key events in the
      * item list fragment to trigger keyboard shortcuts
      * Currently provides a toast when Ctrl + Z and Ctrl + F
      * are triggered
-     */
+     *//*
+
     private val unhandledKeyEventListenerCompat =
         ViewCompat.OnUnhandledKeyEventListenerCompat { v, event ->
             if (event.keyCode == KeyEvent.KEYCODE_Z && event.isCtrlPressed) {
@@ -55,7 +56,7 @@ class ContactListFragment : Fragment() {
             false
         }
 
-    private var _binding: FragmentContactListBinding? = null
+    private var _binding: FragmentContactsListBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -66,7 +67,7 @@ class ContactListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentContactListBinding.inflate(inflater, container, false)
+        _binding = FragmentContactsListBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -76,17 +77,18 @@ class ContactListFragment : Fragment() {
 
         ViewCompat.addOnUnhandledKeyEventListener(view, unhandledKeyEventListenerCompat)
 
-        val recyclerView: RecyclerView = binding.contactList
+        val recyclerView: RecyclerView = binding.recyclerView
 
         // Leaving this not using view binding as it relies on if the view is visible the current
         // layout configuration (layout, layout-sw600dp)
-        val itemDetailFragmentContainer: View? =
-            view.findViewById(R.id.contact_detail_nav_container)
+//        val itemDetailFragmentContainer: View? =
+//            view.findViewById(R.id.contact_detail_nav_container)
 
-        setupRecyclerView(recyclerView, itemDetailFragmentContainer)
+//        setupRecyclerView(recyclerView, itemDetailFragmentContainer)
     }
 
-    private fun setupRecyclerView(
+    */
+/*private fun setupRecyclerView(
         recyclerView: RecyclerView,
         itemDetailFragmentContainer: View?
     ) {
@@ -94,9 +96,11 @@ class ContactListFragment : Fragment() {
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(
             PlaceholderContent.ITEMS, itemDetailFragmentContainer
         )
-    }
+    }*//*
 
-    class SimpleItemRecyclerViewAdapter(
+
+    */
+/*class SimpleItemRecyclerViewAdapter(
         private val values: List<PlaceholderContent.PlaceholderItem>,
         private val itemDetailFragmentContainer: View?
     ) :
@@ -104,7 +108,7 @@ class ContactListFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-            val binding = ContactListContentBinding.inflate(
+            val binding = FragmentContactsListBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -115,8 +119,6 @@ class ContactListFragment : Fragment() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
-            holder.idView.text = item.id
-            holder.contentView.text = item.content
 
             with(holder.itemView) {
                 tag = item
@@ -129,17 +131,21 @@ class ContactListFragment : Fragment() {
                     )
                     if (itemDetailFragmentContainer != null) {
                         itemDetailFragmentContainer.findNavController()
-                            .navigate(R.id.fragment_contact_detail, bundle)
+//                            .navigate(R.id.fragment_contact_detail, bundle)
                     } else {
-                        itemView.findNavController().navigate(R.id.show_contact_detail, bundle)
+//                        itemView.findNavController().navigate(R.id.show_contact_detail, bundle)
                     }
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    /**
+                    *//*
+*/
+/**
                      * Context click listener to handle Right click events
                      * from mice and trackpad input to provide a more native
                      * experience on larger screen devices
-                     */
+                     *//*
+*/
+/*
                     setOnContextClickListener { v ->
                         val item = v.tag as PlaceholderContent.PlaceholderItem
                         Toast.makeText(
@@ -178,20 +184,23 @@ class ContactListFragment : Fragment() {
                     }
                 }
             }
-        }
+        }*//*
 
-        override fun getItemCount() = values.size
 
-        inner class ViewHolder(binding: ContactListContentBinding) :
+        */
+/*override fun getItemCount() = values.size
+
+        inner class ViewHolder(binding: FragmentContactsListBinding) :
             RecyclerView.ViewHolder(binding.root) {
-            val idView: TextView = binding.idText
-            val contentView: TextView = binding.content
-        }
+        }*//*
+
 
     }
 
-    override fun onDestroyView() {
+    */
+/*override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-}
+    }*//*
+
+}*/

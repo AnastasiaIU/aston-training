@@ -1,27 +1,19 @@
-package com.example.astontraining.contactslist
+package com.example.astontraining.view.fragments
 
-import android.os.Build
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.astontraining.BaseApplication
+import com.example.astontraining.ContactsApplication
 import com.example.astontraining.R
-import com.example.astontraining.contactdetail.ContactDetailFragment
-import com.example.astontraining.data.Contact
+import com.example.astontraining.view.adapter.ContactsListAdapter
+import com.example.astontraining.model.Contact
 import com.example.astontraining.databinding.FragmentContactsListBinding
-import com.example.astontraining.placeholder.PlaceholderContent
 import com.example.astontraining.viewmodel.ContactsViewModel
 import com.example.astontraining.viewmodel.ContactsViewModelFactory
 
@@ -29,14 +21,14 @@ import com.example.astontraining.viewmodel.ContactsViewModelFactory
  * A Fragment representing a list of Pings. This fragment
  * has different presentations for handset and larger screen devices. On
  * handsets, the fragment presents a list of items, which when touched,
- * lead to a {@link ContactDetailFragment} representing
+ * lead to a {@link ContactDetailFragmentDelete} representing
  * item details. On larger screens, the Navigation controller presents the list of items and
  * item details side-by-side using two vertical panes.
  */
 /**
  * The fragment with the list of Contacts stored in the database.
  *
- * Clicking on a list item or the FloatingActionButton launches the ContactDetailFragment.
+ * Clicking on a list item or the FloatingActionButton launches the ContactDetailFragmentDelete.
  */
 class ContactsListFragment : Fragment() {
 
@@ -46,7 +38,7 @@ class ContactsListFragment : Fragment() {
      * Currently provides a toast when Ctrl + Z and Ctrl + F
      * are triggered
      */
-    private val unhandledKeyEventListenerCompat =
+    /*private val unhandledKeyEventListenerCompat =
         ViewCompat.OnUnhandledKeyEventListenerCompat { v, event ->
             if (event.keyCode == KeyEvent.KEYCODE_Z && event.isCtrlPressed) {
                 Toast.makeText(
@@ -64,11 +56,11 @@ class ContactsListFragment : Fragment() {
                 true
             }
             false
-        }
+        }*/
 
     private val viewModel: ContactsViewModel by activityViewModels {
         ContactsViewModelFactory(
-            (activity?.application as BaseApplication).database.contactDao()
+            (requireActivity().application as ContactsApplication).repository
         )
     }
 
@@ -88,31 +80,33 @@ class ContactsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ViewCompat.addOnUnhandledKeyEventListener(view, unhandledKeyEventListenerCompat)
+//        ViewCompat.addOnUnhandledKeyEventListener(view, unhandledKeyEventListenerCompat)
 
         // Leaving this not using view binding as it relies on if the view is visible the current
         // layout configuration (layout, layout-sw600dp)
         val contactDetailFragmentContainer: View? =
-            view.findViewById(R.id.contact_detail_nav_container)
+            view.findViewById(R.id.nav_host_fragment)
 
         val toContactDetail: (Int) -> Unit = { contactId ->
 
-            val bundle = bundleOf(ContactDetailFragment.ARG_CONTACT_ID to contactId)
+            val bundle = bundleOf(ContactDetailFragmentDelete.ARG_CONTACT_ID to contactId)
 
-            if (contactDetailFragmentContainer != null) {
+            /*if (contactDetailFragmentContainer != null) {
                 contactDetailFragmentContainer
                     .findNavController()
-                    .navigate(R.id.fragment_contact_detail, bundle)
+                    .navigate(R.id.action_contacts_list_fragment_to_contact_detail_fragment, bundle)
             } else {
-                this.findNavController().navigate(R.id.show_contact_detail, bundle)
-            }
+                this.findNavController().navigate(R.id.action_contacts_list_fragment_to_contact_detail_fragment, bundle)
+            }*/
 
             /*val action = ContactsListFragmentDirections
                 .showContactDetail(id)*/
 
-            //val bundle = bundleOf(ContactDetailFragment.ARG_CONTACT_ID to contactId)
+            //val bundle = bundleOf(ContactDetailFragmentDelete.ARG_CONTACT_ID to contactId)
 
             //this.findNavController().navigate(action)
+
+            this.findNavController().navigate(R.id.action_contacts_list_fragment_to_contact_detail_fragment)
         }
 
         val deleteContact: (Contact) -> Boolean = { contact ->
@@ -133,26 +127,6 @@ class ContactsListFragment : Fragment() {
         binding.apply {
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = adapter
-
-            floatingActionButton.setOnClickListener {
-
-                /*val data = DataSource()
-
-                for (i in 50..109) {
-                    viewModel.addNewContact(
-                        data.namesList[i],
-                        data.surnamesList[i],
-                        data.phoneNumbersList[i]
-                    )
-                }*/
-
-                /*val action = ContactsListFragmentDirections
-                    .showContactDetail(0)*/
-
-                val bundle = bundleOf(ContactDetailFragment.ARG_CONTACT_ID to 0)
-
-                //findNavController().navigate(action)
-            }
         }
     }
 

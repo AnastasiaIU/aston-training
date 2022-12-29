@@ -2,22 +2,24 @@ package com.example.astontraining.viewmodel
 
 import android.telephony.PhoneNumberUtils
 import androidx.lifecycle.*
-import com.example.astontraining.data.Contact
-import com.example.astontraining.data.ContactDao
+import com.example.astontraining.model.Contact
+import com.example.astontraining.model.Repository
 import kotlinx.coroutines.launch
 
 /**
- * Shared [ViewModel] for providing data to fragments and interaction for the [ContactDao].
+ * Shared [ViewModel] for providing data to fragments.
  */
-class ContactsViewModel(private val contactDao: ContactDao) : ViewModel() {
+class ContactsViewModel(private val repository: Repository) : ViewModel() {
 
-    // Cache all contacts form the database using LiveData
-    val contacts: LiveData<List<Contact>> = contactDao.getContacts().asLiveData()
+    /**
+     * The LiveData of the list of [Contact] objects from the database.
+     */
+    val contacts = repository.getAllContacts().asLiveData()
 
     /**
      * Retrieves the [Contact] from the database by id
      */
-    fun retrieveContact(id: Int): LiveData<Contact> = contactDao.getContact(id).asLiveData()
+    fun retrieveContact(id: Int): LiveData<Contact> = repository.tempContactDao.getContact(id).asLiveData()
 
     /**
      * Adds a new [Contact] into the database.
@@ -27,10 +29,11 @@ class ContactsViewModel(private val contactDao: ContactDao) : ViewModel() {
         val newContact = Contact(
             name = name,
             surname = surname,
-            phoneNumber = phoneNumber
+            phoneNumber = phoneNumber.toLong(),
+            imageUrl = ""
         )
 
-        viewModelScope.launch { contactDao.insert(newContact) }
+        viewModelScope.launch { repository.tempContactDao.insertContact(newContact) }
     }
 
     /**
@@ -43,16 +46,16 @@ class ContactsViewModel(private val contactDao: ContactDao) : ViewModel() {
         phoneNumber: String
     ) {
 
-        val contact = Contact(id, name, surname, phoneNumber)
+        val contact = Contact(id, name, surname, phoneNumber.toLong(), "")
 
-        viewModelScope.launch { contactDao.update(contact) }
+        viewModelScope.launch { repository.tempContactDao.update(contact) }
     }
 
     /**
      * Deletes the [Contact] from the database.
      */
     fun deleteContact(contact: Contact) {
-        viewModelScope.launch { contactDao.delete(contact) }
+        viewModelScope.launch { repository.tempContactDao.delete(contact) }
     }
 
     /**
@@ -66,16 +69,16 @@ class ContactsViewModel(private val contactDao: ContactDao) : ViewModel() {
 }
 
 /**
- * Factory class to instantiate the [ViewModel].
+ * Factory class to instantiate the [ContactsViewModel].
  */
-class ContactsViewModelFactory(private val contactDao: ContactDao) :
+class ContactsViewModelFactory(private val repository: Repository) :
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
         if (modelClass.isAssignableFrom(ContactsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return ContactsViewModel(contactDao) as T
+            return ContactsViewModel(repository) as T
         }
 
         throw IllegalAccessException("Unknown ViewModel class")

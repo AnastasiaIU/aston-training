@@ -3,28 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/contact_list_fragment">
+    app:startDestination="@id/sliding_pane">
 
     <fragment
-        android:id="@+id/contact_list_fragment"
-        android:name="com.example.astontraining.contactslist.ContactsListFragment"
-        android:label="@string/contacts_list_fragment_label">
+        android:id="@+id/sliding_pane"
+        android:name="com.example.astontraining.view.fragments.ContactsSlidingPaneFragment"
+        android:label="@string/contacts_list_fragment_label"
+        tools:layout="@layout/fragment_contacts_list">
 
         <action
-            android:id="@+id/show_contact_detail"
+            android:id="@+id/action_contacts_list_fragment_to_contact_detail_fragment"
             app:destination="@id/contact_detail_fragment" />
+
     </fragment>
 
     <fragment
         android:id="@+id/contact_detail_fragment"
-        android:name="com.example.astontraining.contactdetail.ContactDetailFragment"
+        android:name="com.example.astontraining.view.fragments.ContactDetailFragment"
         android:label="@string/contact_detail_fragment_label"
         tools:layout="@layout/fragment_contact_detail">
 
-        <argument
-            android:name="contact_id"
-            app:argType="integer" />
+        <action
+            android:id="@+id/action_contact_detail_fragment_to_contact_detail_edit_fragment"
+            app:destination="@id/contact_detail_edit_fragment" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/contact_detail_edit_fragment"
+        android:name="com.example.astontraining.view.fragments.ContactDetailEditFragment"
+        android:label="@string/contact_detail_edit_fragment_label"
+        tools:layout="@layout/fragment_contact_detail_edit" />
 
 </navigation>

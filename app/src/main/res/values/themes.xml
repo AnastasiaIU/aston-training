@@ -2,6 +2,54 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="Theme.AstonTraining" parent="Theme.Material3.Light" />
+    <style name="Theme.AstonTraining" parent="Theme.Material3.Light">
+
+        <item name="colorPrimary">@color/indigo_100_dark</item>
+        <item name="colorSurface">@color/indigo_100</item>
+
+        <!-- All Material 3 components use a Widget.Material3 style,
+        and these styles reference color attributes from the Material 3 theme (Theme.Material3).
+        It is easy to customize those color attributes across your app
+        by simply overriding them in your theme.
+        We provide three accent color groups (Primary, Secondary, Tertiary),
+        each with 4-5 color roles that you can customize to represent your brand color. -->
+        <!--<item name="colorPrimary">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnPrimary">@android:color/holo_red_light</item>-->
+        <!--<item name="colorPrimaryContainer">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnPrimaryContainer">@android:color/holo_red_light</item>-->
+        <!--<item name="colorPrimaryInverse">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSecondary">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnSecondary">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSecondaryContainer">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnSecondaryContainer">@android:color/holo_red_light</item>-->
+        <!--<item name="colorTertiary">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnTertiary">@android:color/holo_red_light</item>-->
+        <!--<item name="colorTertiaryContainer">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnTertiaryContainer">@android:color/holo_red_light</item>-->
+
+        <!-- The Material Design color theming system provides additional colors which
+        don't represent your brand, but define your UI and ensure accessible color combinations. -->
+        <!--<item name="colorError">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnError">@android:color/holo_red_light</item>-->
+        <!--<item name="colorErrorContainer">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnErrorContainer">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOutline">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOutlineVariant">@android:color/holo_red_light</item>-->
+        <!--<item name="android:colorBackground">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnBackground">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSurface">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnSurface">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSurfaceVariant">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnSurfaceVariant">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSurfaceInverse">@android:color/holo_red_light</item>-->
+        <!--<item name="colorOnSurfaceInverse">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSurfaceBright">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSurfaceDim">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSurfaceContainer">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSurfaceContainerLow">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSurfaceContainerLowest">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSurfaceContainerHigh">@android:color/holo_red_light</item>-->
+        <!--<item name="colorSurfaceContainerHighest">@android:color/holo_red_light</item>-->
+    </style>
 
 </resources>

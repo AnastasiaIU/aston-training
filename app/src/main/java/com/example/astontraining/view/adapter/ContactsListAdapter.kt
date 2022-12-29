@@ -1,4 +1,4 @@
-package com.example.astontraining.contactslist
+package com.example.astontraining.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astontraining.R
-import com.example.astontraining.data.Contact
+import com.example.astontraining.model.Contact
 import com.example.astontraining.databinding.ListItemContactBinding
 
 /**
@@ -55,12 +55,12 @@ class ContactsListAdapter(
 
             val fullName = contact.name + " " + contact.surname
             val phoneNumber = contact.getFormattedPhoneNumber()
-            val resId = getDrawableResId(contact.pictureId)
+//            val resId = getDrawableResId(contact.pictureId)
 
             binding.apply {
                 listItemContactNameAndSurname.text = fullName
                 listItemContactPhoneNumber.text = phoneNumber
-                listItemContactImage.setImageResource(resId)
+//                listItemContactImage.setImageResource(resId)
             }
         }
 
@@ -94,9 +94,9 @@ class ContactsListAdapter(
 
         override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
             return oldItem.name == newItem.name &&
-                    oldItem.surname == newItem.surname &&
-                    oldItem.phoneNumber == newItem.phoneNumber &&
-                    oldItem.pictureId == newItem.pictureId
+                    oldItem.surname == newItem.surname// &&
+//                    oldItem.phoneNumber == newItem.phoneNumber// &&
+//                    oldItem.pictureId == newItem.pictureId
         }
     }
 

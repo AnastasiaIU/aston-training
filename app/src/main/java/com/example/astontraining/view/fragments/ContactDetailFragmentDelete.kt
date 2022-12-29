@@ -1,4 +1,4 @@
-package com.example.astontraining.contactdetail
+package com.example.astontraining.view.fragments
 
 import android.content.ClipData
 import android.os.Bundle
@@ -10,10 +10,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.example.astontraining.BaseApplication
-import com.example.astontraining.data.Contact
+import com.example.astontraining.ContactsApplication
+import com.example.astontraining.model.Contact
 import com.example.astontraining.databinding.FragmentContactDetailBinding
 import com.example.astontraining.viewmodel.ContactsViewModel
 import com.example.astontraining.viewmodel.ContactsViewModelFactory
@@ -22,7 +20,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 /**
  * A fragment to enter data for a new [Contact] or edit data for an existing [Contact].
  */
-class ContactDetailFragment : Fragment() {
+class ContactDetailFragmentDelete : Fragment() {
 
     companion object {
         /**
@@ -36,12 +34,10 @@ class ContactDetailFragment : Fragment() {
 
     private var toolbarLayout: CollapsingToolbarLayout? = null
 
-    private val navigationArgs: ContactDetailFragmentArgs by navArgs()
+//    private val navigationArgs: ContactDetailFragmentArgs by navArgs()
 
     private val viewModel: ContactsViewModel by activityViewModels {
-        ContactsViewModelFactory(
-            (activity?.application as BaseApplication).database.contactDao()
-        )
+        ContactsViewModelFactory((requireActivity().application as ContactsApplication).repository)
     }
 
     private var _binding: FragmentContactDetailBinding? = null
@@ -69,7 +65,7 @@ class ContactDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentContactDetailBinding.inflate(inflater, container, false)
 
-        toolbarLayout = binding.toolbarLayout
+//        toolbarLayout = binding.toolbarLayout
         binding.root.setOnDragListener(dragListener)
 
 
