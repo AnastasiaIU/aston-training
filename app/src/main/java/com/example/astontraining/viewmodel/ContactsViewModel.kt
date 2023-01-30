@@ -1,15 +1,21 @@
 package com.example.astontraining.viewmodel
 
+import android.app.Activity
+import android.provider.ContactsContract
 import android.telephony.PhoneNumberUtils
 import androidx.lifecycle.*
 import com.example.astontraining.model.Contact
+import com.example.astontraining.model.ContactTest
 import com.example.astontraining.model.Repository
+import com.example.astontraining.view.adapter.ContactsListAdapter
 import kotlinx.coroutines.launch
 
 /**
  * Shared [ViewModel] for providing data to fragments.
  */
 class ContactsViewModel(private val repository: Repository) : ViewModel() {
+
+    val contactsList = mutableListOf<ContactTest>()
 
     /**
      * The LiveData of the list of [Contact] objects from the database.
@@ -19,7 +25,8 @@ class ContactsViewModel(private val repository: Repository) : ViewModel() {
     /**
      * Retrieves the [Contact] from the database by id
      */
-    fun retrieveContact(id: Int): LiveData<Contact> = repository.tempContactDao.getContact(id).asLiveData()
+    fun retrieveContact(id: Int): LiveData<Contact> =
+        repository.tempContactDao.getContact(id).asLiveData()
 
     /**
      * Adds a new [Contact] into the database.
@@ -66,6 +73,42 @@ class ContactsViewModel(private val repository: Repository) : ViewModel() {
                 surname.isNotBlank() &&
                 PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)
     }
+
+    /*fun getContacts(activity: Activity, adapter: ContactsListAdapter) {
+
+        contactsList.clear()
+
+        val cursor = activity.contentResolver
+            .query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                arrayOf(
+                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                    ContactsContract.CommonDataKinds.Phone.NUMBER
+                ), null, null,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+            )
+
+        while (cursor!!.moveToNext()) {
+            val contactName = cursor.getString(
+                cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+            )
+            val contactNumber = cursor.getString(
+                cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+            )
+
+            val contact = ContactTest(
+                name = contactName,
+                phoneNumber = contactNumber
+            )
+
+            contactsList.add(contact)
+        }
+
+        adapter.submitList(contactsList)
+        adapter.notifyDataSetChanged()
+
+        cursor.close()
+    }*/
 }
 
 /**

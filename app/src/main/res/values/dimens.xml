@@ -2,6 +2,7 @@
 <resources>
 
     <!-- Margin and padding dimensions. -->
+    <dimen name="margin_16dp">16dp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_regular">16dp</dimen>

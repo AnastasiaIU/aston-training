@@ -1,14 +1,20 @@
 package com.example.astontraining.view.adapter
 
+import android.annotation.SuppressLint
+import android.os.Build
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.SimpleCursorAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astontraining.R
 import com.example.astontraining.model.Contact
 import com.example.astontraining.databinding.ListItemContactBinding
+import com.example.astontraining.model.ContactBase
+import com.example.astontraining.model.ContactTest
 
 /**
  * [ListAdapter] implementation for the [RecyclerView].
@@ -17,7 +23,7 @@ class ContactsListAdapter(
     private val toContactDetail: (Int) -> Unit,
     private val deleteContact: (Contact) -> Boolean
 ) :
-    ListAdapter<Contact, ContactsListAdapter.ContactViewHolder>(DiffCallback) {
+    ListAdapter<ContactBase, ContactsListAdapter.ContactViewHolder>(DiffCallback) {
 
     class ContactViewHolder(
         private var binding: ListItemContactBinding,
@@ -48,19 +54,42 @@ class ContactsListAdapter(
             }
         }
 
-        fun bind(contact: Contact) {
+        fun bind(contact: ContactBase) {
 
-            id = contact.id
-            currentContact = contact
+            /**
+             * Defines an array that contains column names to move from the Cursor to the ListView.
+             */
+            /*@SuppressLint("InlinedApi")
+            val FROM_COLUMNS: Array<String> =
+                arrayOf(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY)*/
 
-            val fullName = contact.name + " " + contact.surname
-            val phoneNumber = contact.getFormattedPhoneNumber()
-//            val resId = getDrawableResId(contact.pictureId)
+            /**
+             * Defines an array that contains resource ids for the layout views
+             * that get the Cursor column contents. The id is pre-defined in
+             * the Android framework, so it is prefaced with "android.R.id".
+             */
+            /*val TO_IDS: IntArray = intArrayOf(binding.listItemContactNameAndSurname.id)
+
+            val cursorAdapter = SimpleCursorAdapter(
+                binding.root.context,
+                binding.root.id,
+                null,
+                FROM_COLUMNS,
+                TO_IDS,
+                0
+            )*/
+
+//            id = contact.id
+//            currentContact = contact
+
+//            val fullName = contact.name + " " + contact.surname
+//            val phoneNumber = contact.getFormattedPhoneNumber()
+            //val resId = getDrawableResId(contact.pictureId)
 
             binding.apply {
-                listItemContactNameAndSurname.text = fullName
-                listItemContactPhoneNumber.text = phoneNumber
-//                listItemContactImage.setImageResource(resId)
+                listItemContactNameAndSurname.text = contact.name
+//                listItemContactPhoneNumber.text = contact.phoneNumber
+                //listItemContactImage.setImageResource(resId)
             }
         }
 
@@ -86,15 +115,15 @@ class ContactsListAdapter(
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Contact>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<ContactBase>() {
 
-        override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-            return oldItem.id == newItem.id
+        override fun areItemsTheSame(oldItem: ContactBase, newItem: ContactBase): Boolean {
+            return oldItem.name == newItem.name
         }
 
-        override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-            return oldItem.name == newItem.name &&
-                    oldItem.surname == newItem.surname// &&
+        override fun areContentsTheSame(oldItem: ContactBase, newItem: ContactBase): Boolean {
+            return oldItem == newItem// &&
+//                    oldItem.surname == newItem.surname// &&
 //                    oldItem.phoneNumber == newItem.phoneNumber// &&
 //                    oldItem.pictureId == newItem.pictureId
         }

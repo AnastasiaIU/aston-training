@@ -117,9 +117,9 @@ class ContactsSlidingPaneFragment : Fragment() {
 
         // Attach an observer on the contacts list to update
         // the UI automatically when the data changes
-        viewModel.contacts.observe(this.viewLifecycleOwner) { contacts ->
+        /*viewModel.contacts.observe(this.viewLifecycleOwner) { contacts ->
             contacts.let { adapter.submitList(it) }
-        }
+        }*/
 
         /*binding.apply {
             recyclerView.layoutManager = LinearLayoutManager(context)

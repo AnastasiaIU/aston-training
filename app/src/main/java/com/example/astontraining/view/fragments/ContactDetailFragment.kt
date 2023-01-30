@@ -68,13 +68,13 @@ class ContactDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         // The usage of an interface lets you inject your own implementation.
-        val menuHost: MenuHost = requireActivity()
+//        val menuHost: MenuHost = requireActivity()
 
         // Add menu items without using the Fragment Menu APIs.
         // Note how we can tie the MenuProvider to the viewLifecycleOwner
         // and an optional Lifecycle.State (here, RESUMED) to indicate when
         // the menu should be visible.
-        menuHost.addMenuProvider(object : MenuProvider {
+        /*menuHost.addMenuProvider(object : MenuProvider {
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 // Add menu items here
@@ -88,7 +88,7 @@ class ContactDetailFragment : Fragment() {
 
                 return true
             }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }, viewLifecycleOwner)*/
     }
 
     override fun onDestroyView() {

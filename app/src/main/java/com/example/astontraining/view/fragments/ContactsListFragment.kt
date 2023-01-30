@@ -1,12 +1,16 @@
 package com.example.astontraining.view.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SimpleCursorAdapter
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.core.view.forEach
+import androidx.core.view.forEachIndexed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.astontraining.ContactsApplication
@@ -14,6 +18,7 @@ import com.example.astontraining.R
 import com.example.astontraining.view.adapter.ContactsListAdapter
 import com.example.astontraining.model.Contact
 import com.example.astontraining.databinding.FragmentContactsListBinding
+import com.example.astontraining.model.ContactsProvider
 import com.example.astontraining.viewmodel.ContactsViewModel
 import com.example.astontraining.viewmodel.ContactsViewModelFactory
 
@@ -80,7 +85,28 @@ class ContactsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        ViewCompat.addOnUnhandledKeyEventListener(view, unhandledKeyEventListenerCompat)
+        // The usage of an interface lets you inject your own implementation
+//        val menuHost: MenuHost = requireActivity()
+
+        // Add menu items without using the Fragment Menu APIs
+        // Note how we can tie the MenuProvider to the viewLifecycleOwner
+        // and an optional Lifecycle.State (here, RESUMED) to indicate when
+        // the menu should be visible
+        /*menuHost.addMenuProvider(object : MenuProvider {
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menu.forEach { it.isVisible = false }
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return true
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)*/
+
+//        binding.searchView.setupWithSearchBar(binding.searchBar)
+
+        //ViewCompat.addOnUnhandledKeyEventListener(view, unhandledKeyEventListenerCompat)
 
         // Leaving this not using view binding as it relies on if the view is visible the current
         // layout configuration (layout, layout-sw600dp)
@@ -106,7 +132,8 @@ class ContactsListFragment : Fragment() {
 
             //this.findNavController().navigate(action)
 
-            this.findNavController().navigate(R.id.action_contacts_list_fragment_to_contact_detail_fragment)
+            this.findNavController()
+                .navigate(R.id.action_contacts_list_fragment_to_contact_detail_fragment)
         }
 
         val deleteContact: (Contact) -> Boolean = { contact ->
@@ -118,11 +145,16 @@ class ContactsListFragment : Fragment() {
 
         val adapter = ContactsListAdapter(toContactDetail, deleteContact)
 
+        val contactsProvider = ContactsProvider()
+
+        contactsProvider.getContacts(requireActivity(), adapter)
+//        viewModel.getContacts(requireActivity(), adapter)
+
         // Attach an observer on the contacts list to update
         // the UI automatically when the data changes
-        viewModel.contacts.observe(this.viewLifecycleOwner) { contacts ->
+        /*viewModel.contacts.observe(this.viewLifecycleOwner) { contacts ->
             contacts.let { adapter.submitList(it) }
-        }
+        }*/
 
         binding.apply {
             recyclerView.layoutManager = LinearLayoutManager(context)
