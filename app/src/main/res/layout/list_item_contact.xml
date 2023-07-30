@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
-    android:minHeight="@dimen/list_item_card_min_height">
+    android:minHeight="@dimen/list_item_card_min_height"
+    android:paddingStart="@dimen/padding_16dp"
+    android:paddingEnd="@dimen/padding_16dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/list_item_contact_image"
-        android:layout_width="@dimen/list_item_image_size"
-        android:layout_height="@dimen/list_item_image_size"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
         android:contentDescription="@string/contact_image_description"
         android:src="@drawable/no_profile_picture_icon"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,10 +20,10 @@
         app:shapeAppearance="@style/ShapeAppearance.AstonTraining.Circle" />
 
     <TextView
-        android:id="@+id/list_item_contact_name_and_surname"
+        android:id="@+id/list_item_contact_full_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/text_margin"
+        android:layout_marginStart="@dimen/margin_16dp"
         android:maxLines="1"
         android:textAppearance="?attr/textAppearanceSubtitle1"
         app:layout_constraintBottom_toTopOf="@id/list_item_contact_phone_number"
@@ -31,13 +33,13 @@
 
     <TextView
         android:id="@+id/list_item_contact_phone_number"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/text_margin"
+        android:layout_marginStart="@dimen/margin_16dp"
         android:maxLines="1"
         android:textAppearance="?attr/textAppearanceBody2"
         app:layout_constraintBottom_toBottomOf="@id/list_item_contact_image"
         app:layout_constraintStart_toEndOf="@id/list_item_contact_image"
-        app:layout_constraintTop_toBottomOf="@id/list_item_contact_name_and_surname" />
+        app:layout_constraintTop_toBottomOf="@id/list_item_contact_full_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

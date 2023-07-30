@@ -7,18 +7,40 @@
     <!-- Descriptions. -->
     <string name="contact_image_description">Contact image</string>
     <string name="floating_action_button_description">Add new contact</string>
+    <string name="search_bar_description">Search for a contact</string>
+    <string name="edit_fab_description">Edit the contact</string>
+    <string name="save_button_description">Save the contact</string>
+    <string name="create_button_description">Create contact</string>
+
+    <!-- Hints. -->
+    <string name="search_bar_hint">Search contacts</string>
+    <string name="edit_field_image_hint">Image URL</string>
+    <string name="edit_field_name_hint">First name</string>
+    <string name="edit_field_surname_hint">Last name</string>
+    <string name="edit_field_phone_number_hint">Phone number</string>
 
     <!-- Fragment labels. -->
     <string name="contacts_list_fragment_label">Contacts</string>
-    <string name="contact_detail_fragment_label">Contact Detail</string>
-    <string name="contact_detail_edit_fragment_label">Edit Contact Detail</string>
+    <string name="contact_details_fragment_label">Contact Details</string>
+    <string name="edit_contact_fragment_label">Edit Contact</string>
+    <string name="create_contact_fragment_label">Create Contact</string>
 
+    <!-- Button labels. -->
+    <string name="save_button_label">Save</string>
+    <string name="create_button_label">Create contact</string>
+
+    <!-- Contact details. -->
     <string name="contact_detail_name">Name</string>
     <string name="contact_detail_surname">Surname</string>
     <string name="contact_detail_phone_number">Phone number</string>
-    <string name="save_button_label">Save</string>
+
+    <!-- Menu items. -->
     <string name="menu_delete">Delete</string>
     <string name="menu_edit">Edit</string>
-    <string name="contact_detail_start_fragment_text">Select a contact to see the details.</string>
+
+    <!-- Toast messages. -->
+    <string name="toast_saved">The contact saved</string>
+    <string name="toast_created">The contact created</string>
+    <string name="toast_wrong_input">Wrong input</string>
 
 </resources>

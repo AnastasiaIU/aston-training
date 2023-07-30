@@ -9,30 +9,36 @@
         android:id="@+id/sliding_pane"
         android:name="com.example.astontraining.view.fragments.ContactsSlidingPaneFragment"
         android:label="@string/contacts_list_fragment_label"
-        tools:layout="@layout/fragment_contacts_list">
+        tools:layout="@layout/fragment_contacts_sliding_pane">
 
         <action
-            android:id="@+id/action_contacts_list_fragment_to_contact_detail_fragment"
-            app:destination="@id/contact_detail_fragment" />
+            android:id="@+id/action_sliding_pane_to_edit_contact_fragment"
+            app:destination="@id/edit_contact_fragment" />
+
+        <action
+            android:id="@+id/action_sliding_pane_to_create_contact_fragment"
+            app:destination="@id/create_contact_fragment" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/contact_detail_fragment"
-        android:name="com.example.astontraining.view.fragments.ContactDetailFragment"
-        android:label="@string/contact_detail_fragment_label"
-        tools:layout="@layout/fragment_contact_detail">
-
-        <action
-            android:id="@+id/action_contact_detail_fragment_to_contact_detail_edit_fragment"
-            app:destination="@id/contact_detail_edit_fragment" />
+        android:id="@+id/contact_details_fragment"
+        android:name="com.example.astontraining.view.fragments.ContactDetailsFragment"
+        android:label="@string/contact_details_fragment_label"
+        tools:layout="@layout/fragment_contact_details">
 
     </fragment>
 
     <fragment
-        android:id="@+id/contact_detail_edit_fragment"
-        android:name="com.example.astontraining.view.fragments.ContactDetailEditFragment"
-        android:label="@string/contact_detail_edit_fragment_label"
-        tools:layout="@layout/fragment_contact_detail_edit" />
+        android:id="@+id/edit_contact_fragment"
+        android:name="com.example.astontraining.view.fragments.EditContactFragment"
+        android:label="@string/edit_contact_fragment_label"
+        tools:layout="@layout/fragment_edit_contact" />
+
+    <fragment
+        android:id="@+id/create_contact_fragment"
+        android:name="com.example.astontraining.view.fragments.CreateContactFragment"
+        android:label="@string/create_contact_fragment_label"
+        tools:layout="@layout/fragment_create_contact" />
 
 </navigation>

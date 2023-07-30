@@ -1,17 +1,24 @@
 package com.example.astontraining.model
 
+import com.example.astontraining.model.database.ContactsDatabase
+
 /**
- * Model layer constants.
+ * Constants of the model layer.
  */
 object ModelConstants {
 
     /**
-     * The name of the database table.
+     * Name of [ContactsDatabase] table.
      */
     const val DATABASE_TABLE_NAME = "contacts"
 
     /**
-     * The name of the database.
+     * Name of [ContactsDatabase] file.
      */
     const val DATABASE_NAME = "contacts_database.db"
+
+    /**
+     * File path to asset database.
+     */
+    const val PATH_TO_ASSET_DATABASE = "database/contacts_database.db"
 }

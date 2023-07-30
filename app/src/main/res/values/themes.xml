@@ -1,55 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Light application theme. -->
     <style name="Theme.AstonTraining" parent="Theme.Material3.Light">
 
-        <item name="colorPrimary">@color/indigo_100_dark</item>
-        <item name="colorSurface">@color/indigo_100</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
 
-        <!-- All Material 3 components use a Widget.Material3 style,
-        and these styles reference color attributes from the Material 3 theme (Theme.Material3).
-        It is easy to customize those color attributes across your app
-        by simply overriding them in your theme.
-        We provide three accent color groups (Primary, Secondary, Tertiary),
-        each with 4-5 color roles that you can customize to represent your brand color. -->
-        <!--<item name="colorPrimary">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnPrimary">@android:color/holo_red_light</item>-->
-        <!--<item name="colorPrimaryContainer">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnPrimaryContainer">@android:color/holo_red_light</item>-->
-        <!--<item name="colorPrimaryInverse">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSecondary">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnSecondary">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSecondaryContainer">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnSecondaryContainer">@android:color/holo_red_light</item>-->
-        <!--<item name="colorTertiary">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnTertiary">@android:color/holo_red_light</item>-->
-        <!--<item name="colorTertiaryContainer">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnTertiaryContainer">@android:color/holo_red_light</item>-->
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
 
-        <!-- The Material Design color theming system provides additional colors which
-        don't represent your brand, but define your UI and ensure accessible color combinations. -->
-        <!--<item name="colorError">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnError">@android:color/holo_red_light</item>-->
-        <!--<item name="colorErrorContainer">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnErrorContainer">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOutline">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOutlineVariant">@android:color/holo_red_light</item>-->
-        <!--<item name="android:colorBackground">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnBackground">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSurface">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnSurface">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSurfaceVariant">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnSurfaceVariant">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSurfaceInverse">@android:color/holo_red_light</item>-->
-        <!--<item name="colorOnSurfaceInverse">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSurfaceBright">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSurfaceDim">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSurfaceContainer">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSurfaceContainerLow">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSurfaceContainerLowest">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSurfaceContainerHigh">@android:color/holo_red_light</item>-->
-        <!--<item name="colorSurfaceContainerHighest">@android:color/holo_red_light</item>-->
     </style>
 
 </resources>

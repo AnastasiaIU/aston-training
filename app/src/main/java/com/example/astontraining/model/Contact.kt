@@ -1,19 +1,18 @@
 package com.example.astontraining.model
 
-import android.telephony.PhoneNumberUtils
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.astontraining.model.ModelConstants.DATABASE_TABLE_NAME
-import java.util.*
+import com.example.astontraining.model.database.ContactsDatabase
 
 /**
- * The [Contact] entity represents a single row in the contacts database.
- * *
- * @property id the ID of the [Contact].
- * @property name the name of the [Contact].
- * @property surname the surname of the [Contact].
- * @property phoneNumber the phone number of the [Contact].
- * @property imageUrl the image URL of the [Contact] picture.
+ * This class represents a single row in the [ContactsDatabase].
+ *
+ * @property id [Contact]'s ID.
+ * @property name [Contact]'s name.
+ * @property surname [Contact]'s surname.
+ * @property phoneNumber [Contact]'s phone number.
+ * @property imageUrl Image URL of the [Contact]'s picture.
  */
 @Entity(tableName = DATABASE_TABLE_NAME)
 data class Contact(
@@ -23,13 +22,4 @@ data class Contact(
     var surname: String,
     var phoneNumber: Long,
     var imageUrl: String
-) {
-
-    // TODO: Remove from here.
-    /**
-     * Returns the formatted phone number.
-     */
-    fun getFormattedPhoneNumber(): String {
-        return PhoneNumberUtils.formatNumber(phoneNumber.toString(), Locale.getDefault().country)
-    }
-}
+)

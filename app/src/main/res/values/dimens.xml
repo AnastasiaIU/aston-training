@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Sliding pane dimensions. -->
+    <dimen name="left_pane">300dp</dimen>
+    <dimen name="right_pane">540dp</dimen>
+
     <!-- Margin and padding dimensions. -->
-    <dimen name="padding_small">8dp</dimen>
-    <dimen name="margin_small">8dp</dimen>
-    <dimen name="margin_regular">16dp</dimen>
-    <dimen name="list_item_image_margin">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
-    <dimen name="container_margin">8dp</dimen>
-    <dimen name="container_horizontal_margin">16dp</dimen>
+    <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
 
     <!-- Width and height dimensions. -->
     <dimen name="width_breakpoint">550dp</dimen>
     <dimen name="item_width">200dp</dimen>
     <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="divider_height">6dp</dimen>
 
     <!-- Size dimensions. -->
-    <dimen name="list_item_image_size">48dp</dimen>
+    <dimen name="avatar_size">48dp</dimen>
+    <dimen name="contact_image_size">150dp</dimen>
 
     <!-- Minimum and maximum dimensions. -->
     <dimen name="list_item_card_min_height">64dp</dimen>
+    <dimen name="contact_detail_card_min_height">64dp</dimen>
 
     <dimen name="no_dp">0dp</dimen>
 

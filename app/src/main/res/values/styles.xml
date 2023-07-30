@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
+    <!-- Shape style Circle. -->
     <style name="ShapeAppearance.AstonTraining.Circle" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Shape style Rounded Corners. -->
+    <style name="ShapeAppearance.AstonTraining.RoundedSmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 

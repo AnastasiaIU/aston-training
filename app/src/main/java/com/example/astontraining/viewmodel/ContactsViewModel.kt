@@ -1,86 +1,131 @@
 package com.example.astontraining.viewmodel
 
-import android.telephony.PhoneNumberUtils
 import androidx.lifecycle.*
 import com.example.astontraining.model.Contact
+import com.example.astontraining.model.database.ContactsDatabase
 import com.example.astontraining.model.Repository
+import com.example.astontraining.viewmodel.ViewModelConstants.SEARCH_DELIMITER
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
- * Shared [ViewModel] for providing data to fragments.
+ * This class represents shared [ViewModel] and provides data for fragments.
  */
 class ContactsViewModel(private val repository: Repository) : ViewModel() {
 
     /**
-     * The LiveData of the list of [Contact] objects from the database.
+     * Current [Contact] to display.
+     */
+    val currentContact: MutableLiveData<Contact> = MutableLiveData()
+
+    /**
+     * All [Contact]s from [ContactsDatabase].
      */
     val contacts = repository.getAllContacts().asLiveData()
 
     /**
-     * Retrieves the [Contact] from the database by id
+     * Current query from a search field.
      */
-    fun retrieveContact(id: Int): LiveData<Contact> = repository.tempContactDao.getContact(id).asLiveData()
+    val searchQuery: MutableLiveData<String> by lazy { MutableLiveData() }
 
     /**
-     * Adds a new [Contact] into the database.
+     * Results of [Contact]s search at [ContactsDatabase].
      */
-    fun addNewContact(name: String, surname: String, phoneNumber: String) {
+    val searchResults: MutableLiveData<List<Contact>> by lazy { MutableLiveData() }
 
-        val newContact = Contact(
-            name = name,
-            surname = surname,
-            phoneNumber = phoneNumber.toLong(),
-            imageUrl = ""
-        )
-
-        viewModelScope.launch { repository.tempContactDao.insertContact(newContact) }
+    /**
+     * Adds provided [contact] into [ContactsDatabase].
+     */
+    fun addNewContact(contact: Contact) {
+        viewModelScope.launch(Dispatchers.IO) { repository.insert(contact) }
     }
 
     /**
-     * Updates the [Contact] in the database.
+     * Updates provided [contact] in [ContactsDatabase].
      */
-    fun updateContact(
-        id: Int,
-        name: String,
-        surname: String,
-        phoneNumber: String
-    ) {
+    fun updateContact(contact: Contact) {
 
-        val contact = Contact(id, name, surname, phoneNumber.toLong(), "")
+        viewModelScope.launch(Dispatchers.IO) { repository.update(contact) }
 
-        viewModelScope.launch { repository.tempContactDao.update(contact) }
+        currentContact.postValue(contact)
     }
 
     /**
-     * Deletes the [Contact] from the database.
+     * Deletes provided [contact] from [ContactsDatabase].
      */
     fun deleteContact(contact: Contact) {
-        viewModelScope.launch { repository.tempContactDao.delete(contact) }
+        viewModelScope.launch(Dispatchers.IO) { repository.delete(contact) }
     }
 
     /**
-     * Returns true if the name and the surname are not empty and the phoneNumber is valid.
+     * Performs a search for [Contact]s with [searchValue] at [ContactsDatabase]
+     * and posts results to [ContactsViewModel].
      */
-    fun isValidEntry(name: String, surname: String, phoneNumber: String): Boolean {
-        return name.isNotBlank() &&
-                surname.isNotBlank() &&
-                PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)
-    }
-}
+    suspend fun search(searchValue: String) {
 
-/**
- * Factory class to instantiate the [ContactsViewModel].
- */
-class ContactsViewModelFactory(private val repository: Repository) :
-    ViewModelProvider.Factory {
+        // List of values to search.
+        val searchValueList = mutableListOf<String>()
 
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        // List of search results.
+        val searchResultList = mutableListOf<Contact>()
 
-        if (modelClass.isAssignableFrom(ContactsViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return ContactsViewModel(repository) as T
+        searchValueList.apply {
+
+            // Add all values for searching.
+            addAll(searchValue.split(SEARCH_DELIMITER))
+
+            forEachIndexed { index, string ->
+
+                if (string.isNotBlank()) {
+
+                    // Add all search results for the first value to the results.
+                    if (index == 0) {
+                        searchResultList.addAll(
+                            repository.databaseSearch(string)
+                        )
+                    } else {
+
+                        // Search results for the current string.
+                        val currentSearchResult = repository.databaseSearch(string)
+
+                        // Results of already performed searches.
+                        val previousSearchResult = mutableListOf<Contact>()
+
+                        previousSearchResult.apply {
+
+                            // Add existing values.
+                            addAll(searchResultList)
+
+                            // Remove everything that does not match existing results.
+                            forEach { contact ->
+                                if (!currentSearchResult.contains(contact)) {
+                                    searchResultList.remove(contact)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
-        throw IllegalAccessException("Unknown ViewModel class")
+        searchResults.postValue(searchResultList)
+    }
+
+    /**
+     * Factory class for instantiating [ContactsViewModel].
+     */
+    class Factory @Inject constructor(private val repository: Repository) :
+        ViewModelProvider.Factory {
+
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+
+            if (modelClass.isAssignableFrom(ContactsViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return ContactsViewModel(repository) as T
+            }
+
+            throw IllegalAccessException("Unknown ViewModel class")
+        }
     }
 }
